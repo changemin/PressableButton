@@ -3,7 +3,7 @@
  <img width=300px  src="src/Logo.gif" alt="Project logo"></a>
 </p>
 
-<h3 align="center">🕹 CM Preesable Button 🕹</h3>
+<h3 align="center">🕹 CM Pressable Button 🕹</h3>
 
 <div align="center">
 
