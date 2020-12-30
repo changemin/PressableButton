@@ -4,18 +4,21 @@ public struct CMPressableButton<Content: View> : View{
     @State var isPressed: Bool = false
     var color: Color = Color(.sRGB, red: 50/255, green: 200/255, blue: 165/255)
     var cornerRadius: CGFloat = 5
+    var width: CGFloat = 280
+    var height: CGFloat = 52
     let content: Content
     var action: () -> () = {}
+    var tmp: Int = 0
     
     public var body: some View {
         ZStack {
             Rectangle()
                 .fill(color)
                 .cornerRadius(cornerRadius)
-                .frame(width: 100, height: 40)
+                .frame(width: width, height: height)
             Color.black.opacity(0.25)
                 .cornerRadius(cornerRadius)
-                .frame(width: 100, height: 40)
+                .frame(width: width, height: height)
             Rectangle()
                 .fill(color)
                 .cornerRadius(cornerRadius)
@@ -24,19 +27,22 @@ public struct CMPressableButton<Content: View> : View{
                         if buttonState == .pressed {
                             isPressed = true
                         } else {
+                            action()
                             isPressed = false
                         }
                 }))
-                .frame(width: 100, height: 40)
+                .frame(width: width, height: height)
                 .offset(y: isPressed ? -3 : -10)
             content.offset(y: isPressed ? -3 : -10)
         }
         
     }
     
-    public init(action: @escaping () -> Void, @ViewBuilder content: () -> Content, color: Color, cornerRadius: CGFloat) {
+    public init(action: @escaping () -> Void, @ViewBuilder content: () -> Content, width: CGFloat, height: CGFloat, color: Color, cornerRadius: CGFloat) {
         self.content = content()
         self.action = action
+        self.width = width
+        self.height = height
         self.color = color
         self.cornerRadius = cornerRadius
     }
@@ -48,18 +54,31 @@ public struct CMPressableButton<Content: View> : View{
 }
 
 extension CMPressableButton {
-    func accentColor(_ color: Color) -> CMPressableButton {
-        CMPressableButton(action: self.action,
-                          content: self.content as! () -> Content,
-                          color: color,
-                          cornerRadius: self.cornerRadius)
-    }
-    func cornerRadius(_ amount: CGFloat) -> CMPressableButton {
-        CMPressableButton(action: self.action,
-                          content: self.content as! () -> Content,
-                          color: self.color,
-                          cornerRadius: amount)
-    }
+//    public func accentColor<Content: View>(_ color: Color) -> CMPressableButton {
+//        var content = self.content
+//        return CMPressableButton(action: self.action,
+//                          content: content,
+//                          width: self.width,
+//                          height: self.height,
+//                          color: color,
+//                          cornerRadius: self.cornerRadius)
+//    }
+//    public func cornerRadius(_ amount: CGFloat) -> CMPressableButton {
+//        CMPressableButton(action: self.action,
+//                          content: self.content as () -> Content ,
+//                          width: self.width,
+//                          height: self.height,
+//                          color: self.color,
+//                          cornerRadius: amount)
+//    }
+//    public func frame(width: CGFloat, height: CGFloat) -> CMPressableButton {
+//        CMPressableButton(action: self.action,
+//                          content: self.content ,
+//                          width: width,
+//                          height: height,
+//                          color: self.color,
+//                          cornerRadius: self.cornerRadius)
+//    }
 }
 
 
