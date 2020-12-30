@@ -6,9 +6,10 @@ public struct CMPressableButton<Content: View> : View{
     var cornerRadius: CGFloat = 5
     var width: CGFloat = 280
     var height: CGFloat = 52
+    var depth: CGFloat =  5
     let content: Content
     var action: () -> () = {}
-    var tmp: Int = 0
+    
     
     public var body: some View {
         ZStack {
@@ -16,6 +17,7 @@ public struct CMPressableButton<Content: View> : View{
                 .fill(color)
                 .cornerRadius(cornerRadius)
                 .frame(width: width, height: height)
+                .shadow(radius: isPressed ? 2 : 5)
             Color.black.opacity(0.25)
                 .cornerRadius(cornerRadius)
                 .frame(width: width, height: height)
@@ -38,8 +40,14 @@ public struct CMPressableButton<Content: View> : View{
                         }
                 }))
                 .frame(width: width, height: height)
-                .offset(y: isPressed ? -3 : -10)
-            content.offset(y: isPressed ? -3 : -10)
+                .offset(y: isPressed ? -3 : -depth-3)
+            Rectangle()
+                .fill(Color.black)
+                .cornerRadius(cornerRadius)
+                .frame(width: width, height: height)
+                .opacity(isPressed ? 0.05 : 0)
+                .offset(y: isPressed ? -3 : -depth-3)
+            content.offset(y: isPressed ? -3 : -depth-3)
         }
         
     }
