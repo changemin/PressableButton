@@ -101,6 +101,7 @@ struct ContentView: View {
 
 ## ✅ TODO
 - [ ] support variable styles `FlatStyle`, `PushButtonStyle`, etc
+- [ ] add haptic feedback
 
 ## 📜 License
 
