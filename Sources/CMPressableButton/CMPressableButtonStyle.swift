@@ -7,9 +7,10 @@
 
 import Foundation
 
-//enum CMPressableButtonStyle {
-//    case hard
-//    case rounded
-//}
+enum CMPressableButtonStyle {
+    case hardStyle
+    case roundedStyle
+    case pushButtonStyle
+}
 
 

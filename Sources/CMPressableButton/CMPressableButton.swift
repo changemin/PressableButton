@@ -10,7 +10,6 @@ public struct CMPressableButton<Content: View> : View{
     let content: Content
     var action: () -> () = {}
     
-    
     public var body: some View {
         ZStack {
             Rectangle()
@@ -36,7 +35,6 @@ public struct CMPressableButton<Content: View> : View{
                             withAnimation(Animation.easeInOut(duration: 0.05)) {
                                 isPressed = false
                             }
-                            
                         }
                 }))
                 .frame(width: width, height: height)
@@ -46,10 +44,9 @@ public struct CMPressableButton<Content: View> : View{
                 .cornerRadius(cornerRadius)
                 .frame(width: width, height: height)
                 .opacity(isPressed ? 0.03 : 0)
-                .offset(y: isPressed ? -3 : -depth-3)
-            content.offset(y: isPressed ? -3 : -depth-3)
+                .offset(y: isPressed ? -5 : -depth-5)
+            content.offset(y: isPressed ? -5 : -depth-5)
         }
-        
     }
     
     public init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content, width: CGFloat, height: CGFloat, color: Color, cornerRadius: CGFloat) {
@@ -93,49 +90,3 @@ extension CMPressableButton {
                           cornerRadius: self.cornerRadius)
     }
 }
-
-
-
-//extension Color {
-//    /**
-//     Create a ligher color
-//     */
-//    func lighter(by percentage: CGFloat = 10.0) -> Color {
-//        return self.adjustBrightness(by: abs(percentage))
-//    }
-//
-//    /**
-//     Create a darker color
-//     */
-//    func darker(by percentage: CGFloat = 10.0) -> Color {
-//        return self.adjustBrightness(by: -abs(percentage))
-//    }
-//
-//    /**
-//     Try to adjust brightness and falls back to adjusting colors if necessary
-//     */
-//    func adjustBrightness(by percentage: CGFloat) -> Color {
-//        var alpha, hue, saturation, brightness, red, green, blue, white : CGFloat
-//        (alpha, hue, saturation, brightness, red, green, blue, white) = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-//
-//        let multiplier = percentage / 100.0
-//
-//        self.hue
-//        if self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
-//            let newBrightness: CGFloat = max(min(brightness + multiplier*brightness, 1.0), 0.0)
-//            return UIColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
-//        }
-//        else if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
-//            let newRed: CGFloat = min(max(red + multiplier*red, 0.0), 1.0)
-//            let newGreen: CGFloat = min(max(green + multiplier*green, 0.0), 1.0)
-//            let newBlue: CGFloat = min(max(blue + multiplier*blue, 0.0), 1.0)
-//            return UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: alpha)
-//        }
-//        else if self.getWhite(&white, alpha: &alpha) {
-//            let newWhite: CGFloat = (white + multiplier*white)
-//            return UIColor(white: newWhite, alpha: alpha)
-//        }
-//
-//        return self
-//    }
-//}
