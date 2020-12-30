@@ -45,14 +45,14 @@ public struct CMPressableButton<Content: View> : View{
                 .fill(Color.black)
                 .cornerRadius(cornerRadius)
                 .frame(width: width, height: height)
-                .opacity(isPressed ? 0.05 : 0)
+                .opacity(isPressed ? 0.03 : 0)
                 .offset(y: isPressed ? -3 : -depth-3)
             content.offset(y: isPressed ? -3 : -depth-3)
         }
         
     }
     
-    public init(action: @escaping () -> Void, @ViewBuilder content: () -> Content, width: CGFloat, height: CGFloat, color: Color, cornerRadius: CGFloat) {
+    public init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content, width: CGFloat, height: CGFloat, color: Color, cornerRadius: CGFloat) {
         self.content = content()
         self.action = action
         self.width = width
@@ -61,38 +61,37 @@ public struct CMPressableButton<Content: View> : View{
         self.cornerRadius = cornerRadius
     }
     
-    public init(action: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+    public init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
         self.content = content()
         self.action = action
     }
 }
 
 extension CMPressableButton {
-//    public func accentColor<Content: View>(_ color: Color) -> CMPressableButton {
-//        var content = self.content
-//        return CMPressableButton(action: self.action,
-//                          content: content,
-//                          width: self.width,
-//                          height: self.height,
-//                          color: color,
-//                          cornerRadius: self.cornerRadius)
-//    }
-//    public func cornerRadius(_ amount: CGFloat) -> CMPressableButton {
-//        CMPressableButton(action: self.action,
-//                          content: self.content as () -> Content ,
-//                          width: self.width,
-//                          height: self.height,
-//                          color: self.color,
-//                          cornerRadius: amount)
-//    }
-//    public func frame(width: CGFloat, height: CGFloat) -> CMPressableButton {
-//        CMPressableButton(action: self.action,
-//                          content: self.content ,
-//                          width: width,
-//                          height: height,
-//                          color: self.color,
-//                          cornerRadius: self.cornerRadius)
-//    }
+    public func accentColor(_ color: Color) -> CMPressableButton {
+        CMPressableButton(action: self.action,
+                          content: { self.content },
+                          width: self.width,
+                          height: self.height,
+                          color: color,
+                          cornerRadius: self.cornerRadius)
+    }
+    public func cornerRadius(_ amount: CGFloat) -> CMPressableButton {
+        CMPressableButton(action: self.action,
+                          content: { self.content },
+                          width: self.width,
+                          height: self.height,
+                          color: self.color,
+                          cornerRadius: amount)
+    }
+    public func frame(width: CGFloat, height: CGFloat) -> CMPressableButton {
+        CMPressableButton(action: self.action,
+                          content: { self.content },
+                          width: width,
+                          height: height,
+                          color: self.color,
+                          cornerRadius: self.cornerRadius)
+    }
 }
 
 
