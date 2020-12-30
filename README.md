@@ -7,7 +7,7 @@
 
 <div align="center">
 
-![License](https://img.shields.io/github/license/CM-Material/CMPressableButton=for-the-badge)
+![License](https://img.shields.io/github/license/CM-Material/CMPressableButton?style=for-the-badge)
 ![Release](https://img.shields.io/github/v/release/CM-Material/CMPressableButton?style=for-the-badge)
 
 </div>
