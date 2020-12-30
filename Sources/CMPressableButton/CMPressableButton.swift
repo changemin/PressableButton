@@ -25,10 +25,16 @@ public struct CMPressableButton<Content: View> : View{
                 .modifier(
                     TouchEventModifier(changeState: { (buttonState) in
                         if buttonState == .pressed {
-                            isPressed = true
+                            withAnimation(Animation.easeInOut(duration: 0.05)) {
+                                isPressed = true
+                            }
+                            
                         } else {
                             action()
-                            isPressed = false
+                            withAnimation(Animation.easeInOut(duration: 0.05)) {
+                                isPressed = false
+                            }
+                            
                         }
                 }))
                 .frame(width: width, height: height)
