@@ -7,6 +7,7 @@ public struct CMPressableButton<Content: View> : View{
     var width: CGFloat = 280
     var height: CGFloat = 52
     var depth: CGFloat =  5
+    var hapticEffect: (useHaptic: Bool, intensity: UIImpactFeedbackGenerator.FeedbackStyle) = (true, .heavy)
     let content: Content
     var action: () -> () = {}
     
@@ -26,11 +27,16 @@ public struct CMPressableButton<Content: View> : View{
                 .modifier(
                     TouchEventModifier(changeState: { (buttonState) in
                         if buttonState == .pressed {
+                            if(hapticEffect.useHaptic) {
+                                UIImpactFeedbackGenerator(style: hapticEffect.intensity).impactOccurred()
+                            }
                             withAnimation(Animation.easeInOut(duration: 0.05)) {
                                 isPressed = true
                             }
-                            
                         } else {
+                            if(hapticEffect.useHaptic) {
+                                UIImpactFeedbackGenerator(style: hapticEffect.intensity).impactOccurred()
+                            }
                             action()
                             withAnimation(Animation.easeInOut(duration: 0.05)) {
                                 isPressed = false
@@ -38,7 +44,7 @@ public struct CMPressableButton<Content: View> : View{
                         }
                 }))
                 .frame(width: width, height: height)
-                .offset(y: isPressed ? -3 : -depth-3)
+                .offset(y: isPressed ? -5 : -depth-5)
             Rectangle()
                 .fill(Color.black)
                 .cornerRadius(cornerRadius)
@@ -49,13 +55,14 @@ public struct CMPressableButton<Content: View> : View{
         }
     }
     
-    public init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content, width: CGFloat, height: CGFloat, color: Color, cornerRadius: CGFloat) {
+    public init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content, width: CGFloat, height: CGFloat, color: Color, cornerRadius: CGFloat, useHaptic: Bool, hapticIntensity: UIImpactFeedbackGenerator.FeedbackStyle) {
         self.content = content()
         self.action = action
         self.width = width
         self.height = height
         self.color = color
         self.cornerRadius = cornerRadius
+        self.hapticEffect = (useHaptic, hapticIntensity)
     }
     
     public init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
@@ -71,7 +78,9 @@ extension CMPressableButton {
                           width: self.width,
                           height: self.height,
                           color: color,
-                          cornerRadius: self.cornerRadius)
+                          cornerRadius: self.cornerRadius,
+                          useHaptic: self.hapticEffect.0,
+                          hapticIntensity: self.hapticEffect.1)
     }
     public func cornerRadius(_ amount: CGFloat) -> CMPressableButton {
         CMPressableButton(action: self.action,
@@ -79,7 +88,9 @@ extension CMPressableButton {
                           width: self.width,
                           height: self.height,
                           color: self.color,
-                          cornerRadius: amount)
+                          cornerRadius: amount,
+                          useHaptic: self.hapticEffect.0,
+                          hapticIntensity: self.hapticEffect.1)
     }
     public func frame(width: CGFloat, height: CGFloat) -> CMPressableButton {
         CMPressableButton(action: self.action,
@@ -87,6 +98,28 @@ extension CMPressableButton {
                           width: width,
                           height: height,
                           color: self.color,
-                          cornerRadius: self.cornerRadius)
+                          cornerRadius: self.cornerRadius,
+                          useHaptic: self.hapticEffect.0,
+                          hapticIntensity: self.hapticEffect.1)
+    }
+    public func enableHaptic(intensity: UIImpactFeedbackGenerator.FeedbackStyle) -> CMPressableButton {
+        CMPressableButton(action: self.action,
+                          content: { self.content },
+                          width: self.width,
+                          height: self.height,
+                          color: self.color,
+                          cornerRadius: self.cornerRadius,
+                          useHaptic: self.hapticEffect.0,
+                          hapticIntensity: intensity)
+    }
+    public func disableHaptic() -> CMPressableButton {
+        CMPressableButton(action: self.action,
+                          content: { self.content },
+                          width: self.width,
+                          height: self.height,
+                          color: self.color,
+                          cornerRadius: self.cornerRadius,
+                          useHaptic: false,
+                          hapticIntensity: self.hapticEffect.1)
     }
 }
