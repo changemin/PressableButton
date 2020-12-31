@@ -50,11 +50,16 @@ CMPressableButton(action: { YOUR ACTION }) {
     // YOUR VIEW
 }.accentColor(_ color: color)
 .cornerRadius(_ amount: CGFloat)
-.frame(height: CGFloat, width: CGFloat)
+.frame(width: CGFloat, height: CGFloat)
+.enableHaptic(intensity: UIImpactFeedbackGenerator.FeedbackStyle)
+.disableHaptic()
 ```
 * `.accentColor()` : Accent color
 * `.cornerRadius()` : Corner Radius of the button
 * `.frame()` : Size of the button
+* `.enableHaptic()` : Enable haptic effect with insensity(`.heavy`, `.medium`, `.light`, `.rigid`, `.soft`)
+* `.disableHaptic()` : Disable haptic effect
+
 ## Example
 #### 👶 Simple
 ```Swift
@@ -76,7 +81,7 @@ struct ContentView: View {
     <img src="src/Example-simple-2.png" width="25%">
 </p>
 
-### 🛠 Custom Modifier
+### 🛠 Custom Modifiers
 ```Swift
 import CMPressableButton
 
@@ -87,6 +92,7 @@ struct ContentView: View {
         }) {
             Text("PUSH ME !").foregroundColor(.white)
         }
+        .enableHaptic(.soft)
         .accentColor(.orange)
         .cornerRadius(0)
     }
@@ -101,7 +107,7 @@ struct ContentView: View {
 
 ## ✅ TODO
 - [ ] support variable styles `FlatStyle`, `PushButtonStyle`, etc
-- [ ] add haptic feedback
+- [x] add haptic feedback
 
 ## 📜 License
 
