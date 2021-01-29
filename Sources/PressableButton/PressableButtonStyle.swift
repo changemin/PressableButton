@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CMPressableButtonStyle {
+enum PressableButtonStyle {
     case FlatStyle
     case RoundedStyle
     case PushButtonStyle

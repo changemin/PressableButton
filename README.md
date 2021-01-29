@@ -1,14 +1,14 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=300px  src="src/Logo.gif" alt="Project logo"></a>
+ <img width=300px  src="imgs/Logo.gif" alt="Project logo"></a>
 </p>
 
-<h3 align="center">🕹 CM Pressable Button 🕹</h3>
+<h3 align="center">🕹 SwiftUI Pressable Button 🕹</h3>
 
 <div align="center">
 
-![License](https://img.shields.io/github/license/CM-Material/CMPressableButton?style=for-the-badge)
-![Release](https://img.shields.io/github/v/release/CM-Material/CMPressableButton?style=for-the-badge)
+![License](https://img.shields.io/github/license/Changemin/PressableButton?style=for-the-badge)
+![Release](https://img.shields.io/github/v/release/Changemin/PressableButton?style=for-the-badge)
 
 </div>
 
@@ -17,7 +17,7 @@
 ## 📹 Preview
 
 <p align="center">
-    <img src="src/appVideo.gif" width="40%" />
+    <img src="imgs/appVideo.gif" width="40%" />
 </p>
 
 ## 🏁 Getting Started
@@ -33,12 +33,12 @@
     File ➜ Swift Packages ➜ Add Package Dependancy..
 
 ```Swift
-.package(url: "https://github.com/CM-Material/CMPressableButton", from: "1.0.0")
+.package(url: "https://github.com/Changemin/PressableButton", from: "1.1.0")
 ```
 
 ## 🎈Usage
 ```Swift
-CMPressableButton(action: { YOUR ACTION }) {
+PressableButton(action: { YOUR ACTION }) {
     // YOUR VIEW
 }
 ```
@@ -46,7 +46,7 @@ CMPressableButton(action: { YOUR ACTION }) {
 
 #### 🛠Custom Modifiers
 ```Swift
-CMPressableButton(action: { YOUR ACTION }) {
+PressableButton(action: { YOUR ACTION }) {
     // YOUR VIEW
 }.accentColor(_ color: color)
 .cornerRadius(_ amount: CGFloat)
@@ -63,11 +63,11 @@ CMPressableButton(action: { YOUR ACTION }) {
 ## Example
 #### 👶 Simple
 ```Swift
-import CMPressableButton
+import PressableButton
 
 struct ContentView: View {
     var body: some View {
-        CMPressableButton(action: {
+        PressableButton(action: {
             print("Button pressed")
         }) {
             Text("Simple Example").foregroundColor(.white)
@@ -77,17 +77,17 @@ struct ContentView: View {
 ```
 #### Result
 <p float="left">
-    <img src="src/Example-simple-1.png" width="25%">
-    <img src="src/Example-simple-2.png" width="25%">
+    <img src="imgs/Example-simple-1.png" width="25%">
+    <img src="imgs/Example-simple-2.png" width="25%">
 </p>
 
 ### 🛠 Custom Modifiers
 ```Swift
-import CMPressableButton
+import PressableButton
 
 struct ContentView: View {
     var body: some View {
-        CMPressableButton(action: {
+        PressableButton(action: {
             print("Button pressed")
         }) {
             Text("PUSH ME !").foregroundColor(.white)
@@ -101,8 +101,8 @@ struct ContentView: View {
 
 ### Result
 <p float="left">
-    <img src="src/Example-customModifier-1.png" width="25%">
-    <img src="src/Example-customModifier-2.png" width="25%">
+    <img src="imgs/Example-customModifier-1.png" width="25%">
+    <img src="imgs/Example-customModifier-2.png" width="25%">
 </p>
 
 ## ✅ TODO
